@@ -35,6 +35,49 @@ A arquitetura da aplicação segue uma divisão em camadas:
 - **Controllers**: Responsáveis por lidar com as requisições HTTP.
 - **Connection (AppDbContext)**: Responsável pela conexão e mapeamento com o banco.
 
+## 📚 Endpoints da API
+
+| Método | Rota                              | Descrição                                                                 |
+|--------|-----------------------------------|---------------------------------------------------------------------------|
+| GET    | /api/Usuario                      | Lista todos os usuários                                                  |
+| GET    | /api/Usuario/{id}                 | Retorna um usuário pelo ID                                               |
+| GET    | /api/Usuario/email?email={email}  | Retorna um usuário pelo e-mail                                           |
+| POST   | /api/Usuario                      | Cria um novo usuário                                                     |
+| PUT    | /api/Usuario/{id}                 | Atualiza os dados de um usuário                                          |
+| DELETE | /api/Usuario/{id}                 | Deleta um usuário                                                        |
+|        |                                   |                                                                           |
+| GET    | /api/Ajuda                        | Lista todas as ajudas                                                    |
+| GET    | /api/Ajuda/{id}                   | Retorna uma ajuda específica                                             |
+| POST   | /api/Ajuda                        | Cadastra uma nova ajuda                                                  |
+| PUT    | /api/Ajuda/{id}                   | Atualiza uma ajuda                                                       |
+| DELETE | /api/Ajuda/{id}                   | Remove uma ajuda                                                         |
+|        |                                   |                                                                           |
+| GET    | /api/Mensagem                     | Lista todas as mensagens                                                 |
+| GET    | /api/Mensagem/{id}                | Retorna uma mensagem pelo ID                                             |
+| GET    | /api/Mensagem/ajuda/{ajudaId}     | Lista mensagens relacionadas a uma ajuda                                 |
+| POST   | /api/Mensagem                     | Envia uma nova mensagem                                                  |
+| PUT    | /api/Mensagem/{id}                | Edita uma mensagem existente                                             |
+| DELETE | /api/Mensagem/{id}                | Remove uma mensagem                                                      |
+|        |                                   |                                                                           |
+| GET    | /api/TipoUsuario                  | Lista todos os tipos de usuário                                          |
+| GET    | /api/TipoUsuario/{id}             | Retorna um tipo de usuário específico                                    |
+| POST   | /api/TipoUsuario                  | Cadastra um novo tipo de usuário                                         |
+| PUT    | /api/TipoUsuario/{id}             | Atualiza um tipo de usuário                                              |
+| DELETE | /api/TipoUsuario/{id}             | Remove um tipo de usuário                                                |
+|        |                                   |                                                                           |
+| GET    | /api/TipoRecurso                  | Lista todos os tipos de recurso                                          |
+| GET    | /api/TipoRecurso/{id}             | Retorna um tipo de recurso específico                                    |
+| POST   | /api/TipoRecurso                  | Cadastra um novo tipo de recurso                                         |
+| PUT    | /api/TipoRecurso/{id}             | Atualiza um tipo de recurso                                              |
+| DELETE | /api/TipoRecurso/{id}             | Remove um tipo de recurso                                                |
+|        |                                   |                                                                           |
+| GET    | /api/TipoZona                     | Lista todos os tipos de zona                                             |
+| GET    | /api/TipoZona/{id}                | Retorna um tipo de zona específico                                       |
+| POST   | /api/TipoZona                     | Cadastra um novo tipo de zona                                            |
+| PUT    | /api/TipoZona/{id}                | Atualiza um tipo de zona                                                 |
+| DELETE | /api/TipoZona/{id}                | Remove um tipo de zona                                                   |
+
+
 ## 🔁 Padrões e Boas Práticas Aplicadas
 
 - Uso de DTOs para evitar exposição direta das entidades
