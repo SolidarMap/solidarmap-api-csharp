@@ -6,6 +6,7 @@ D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarM
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\bin\Debug\net9.0\SolidarMap.runtimeconfig.json
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\bin\Debug\net9.0\SolidarMap.dll
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\bin\Debug\net9.0\SolidarMap.pdb
+D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\bin\Debug\net9.0\SolidarMap.xml
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\bin\Debug\net9.0\Humanizer.dll
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\bin\Debug\net9.0\Microsoft.AspNetCore.Razor.Language.dll
@@ -255,6 +256,7 @@ D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarM
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\obj\Debug\net9.0\SolidarMap.csproj.Up2Date
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\obj\Debug\net9.0\SolidarMap.dll
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\obj\Debug\net9.0\refint\SolidarMap.dll
+D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\obj\Debug\net9.0\SolidarMap.xml
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\obj\Debug\net9.0\SolidarMap.pdb
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\obj\Debug\net9.0\SolidarMap.genruntimeconfig.cache
 D:\FIAP\2TDSPH-1SEM\ADVANCED_BUSINESS _DEVELOPMENT_WITH_.NET\SolidarMap\SolidarMap\obj\Debug\net9.0\ref\SolidarMap.dll

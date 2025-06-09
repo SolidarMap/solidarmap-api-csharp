@@ -1,0 +1,2489 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Global Solution - SolidarMap - Sistema de Ajuda Colaborativa em Crises",
+    "description": "O SolidarMap é um sistema que conecta pessoas em situações de emergência com recursos essenciais como comida, abrigo, remédios e água. A plataforma utiliza localização geográfica, comunicação direta e avaliações para promover a confiança e agilidade em momentos críticos.",
+    "contact": {
+      "name": "Pedro Henrique Vasco Antonieti - RM: 556253"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Ajuda": {
+      "get": {
+        "tags": [
+          "Ajuda"
+        ],
+        "summary": "Exibe todos as ajudas cadastradas.",
+        "responses": {
+          "200": {
+            "description": "Retorna lista com objetos das ajudas encontradas.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AjudaResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AjudaResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AjudaResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Ajuda"
+        ],
+        "summary": "Cadastra uma nova ajuda na base de dados.",
+        "requestBody": {
+          "description": "Objeto com os dados da ajuda a ser cadastrada.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AjudaRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AjudaRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AjudaRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjudaResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjudaResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjudaResponseDTO"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Ajuda inserida."
+          },
+          "400": {
+            "description": "Requisição inválida."
+          }
+        }
+      }
+    },
+    "/api/Ajuda/{id}": {
+      "get": {
+        "tags": [
+          "Ajuda"
+        ],
+        "summary": "Exibe o objeto da ajuda cadastrada no id informado.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da ajuda a ser buscado.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ajuda encontradA.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjudaResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjudaResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AjudaResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ajuda não encontrada no banco de dados."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Ajuda"
+        ],
+        "summary": "Atualiza os dados de uma ajuda existente no banco de dados.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da ajuda a ser atualizada. Deve coincidir com o ID do objeto fornecido.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Objeto com os novos dados d.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AjudaRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AjudaRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AjudaRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Atualização realizada com sucesso."
+          },
+          "400": {
+            "description": "Usuário ou Tipo de Recurso são inválidos."
+          },
+          "404": {
+            "description": "AJuda não encontrada no banco de dados."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Ajuda"
+        ],
+        "summary": "Remove uma ajuda existente pelo seu id.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da ajuda a ser removida.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Ajuda excluída."
+          },
+          "404": {
+            "description": "Ajuda não encontrado no banco de dados."
+          }
+        }
+      }
+    },
+    "/api/Ajuda/usuario/{usuarioId}": {
+      "get": {
+        "tags": [
+          "Ajuda"
+        ],
+        "summary": "Exibe uma lista de ajudas cadastradas no ID do usuário informado.",
+        "parameters": [
+          {
+            "name": "usuarioId",
+            "in": "path",
+            "description": "ID do Usuário para buscar as ajudas.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ajudas encontradas.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AjudaResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AjudaResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AjudaResponseDTO"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ajudas não encontradas no banco de dados."
+          }
+        }
+      }
+    },
+    "/api/Avaliacao": {
+      "get": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "summary": "Exibe todas as avaliações cadastradas.",
+        "responses": {
+          "200": {
+            "description": "Retorna a lista de avaliações.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "summary": "Cadastra uma nova avaliação.",
+        "requestBody": {
+          "description": "Dados da avaliação.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvaliacaoRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvaliacaoRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvaliacaoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Avaliação criada."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "500": {
+            "description": "Erro ao salvar no banco."
+          }
+        }
+      }
+    },
+    "/api/Avaliacao/{id}": {
+      "get": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "summary": "Retorna uma avaliação específica pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da avaliação.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Avaliação encontrada.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Avaliação não encontrada."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "summary": "Atualiza uma avaliação existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da avaliação.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Novos dados.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvaliacaoRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvaliacaoRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvaliacaoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Atualização realizada com sucesso."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "404": {
+            "description": "Avaliação não encontrada."
+          },
+          "500": {
+            "description": "Erro ao atualizar no banco."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "summary": "Remove uma avaliação pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da avaliação.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Avaliação excluída com sucesso."
+          },
+          "404": {
+            "description": "Avaliação não encontrada."
+          },
+          "500": {
+            "description": "Erro ao remover do banco."
+          }
+        }
+      }
+    },
+    "/api/Avaliacao/ajuda/{ajudaId}": {
+      "get": {
+        "tags": [
+          "Avaliacao"
+        ],
+        "summary": "Retorna todas as avaliações vinculadas a uma ajuda específica.",
+        "parameters": [
+          {
+            "name": "ajudaId",
+            "in": "path",
+            "description": "ID da ajuda.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de avaliações encontrada.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvaliacaoResponseDTO"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ajuda não encontrada."
+          }
+        }
+      }
+    },
+    "/api/Localizacao": {
+      "get": {
+        "tags": [
+          "Localizacao"
+        ],
+        "summary": "Lista todas as localizações cadastradas.",
+        "responses": {
+          "200": {
+            "description": "Retorna todas as localizações.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Localizacao"
+        ],
+        "summary": "Cadastra uma nova localização.",
+        "requestBody": {
+          "description": "Dados da localização.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalizacaoRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalizacaoRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalizacaoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Localização criada."
+          },
+          "400": {
+            "description": "Dados inválidos (ajuda ou zona inexistente)."
+          },
+          "500": {
+            "description": "Erro interno ao salvar no banco de dados."
+          }
+        }
+      }
+    },
+    "/api/Localizacao/{id}": {
+      "get": {
+        "tags": [
+          "Localizacao"
+        ],
+        "summary": "Busca uma localização específica por ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da localização.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Localização encontrada.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Localização não encontrada."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Localizacao"
+        ],
+        "summary": "Atualiza os dados de uma localização existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da localização.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Novos dados da localização.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalizacaoRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalizacaoRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalizacaoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Atualização bem-sucedida."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "404": {
+            "description": "Localização não encontrada."
+          },
+          "500": {
+            "description": "Erro ao atualizar no banco."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Localizacao"
+        ],
+        "summary": "Remove uma localização pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da localização.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Localização excluída com sucesso."
+          },
+          "404": {
+            "description": "Localização não encontrada."
+          },
+          "500": {
+            "description": "Erro ao remover do banco."
+          }
+        }
+      }
+    },
+    "/api/Localizacao/ajudaId/{ajudaId}": {
+      "get": {
+        "tags": [
+          "Localizacao"
+        ],
+        "summary": "Busca uma localização associada a uma ajuda.",
+        "parameters": [
+          {
+            "name": "ajudaId",
+            "in": "path",
+            "description": "ID da ajuda.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Localização encontrada.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizacaoResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Localização não encontrada."
+          }
+        }
+      }
+    },
+    "/api/Mensagem": {
+      "get": {
+        "tags": [
+          "Mensagem"
+        ],
+        "summary": "Lista todas as mensagens cadastradas.",
+        "responses": {
+          "200": {
+            "description": "Retorna todas as mensagens.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MensagemResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MensagemResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MensagemResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Mensagem"
+        ],
+        "summary": "Cadastra uma nova mensagem.",
+        "requestBody": {
+          "description": "Dados da mensagem.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MensagemRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MensagemRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MensagemRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensagemResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensagemResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensagemResponseDTO"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Mensagem criada."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "500": {
+            "description": "Erro ao salvar no banco."
+          }
+        }
+      }
+    },
+    "/api/Mensagem/ajuda/{ajudaId}": {
+      "get": {
+        "tags": [
+          "Mensagem"
+        ],
+        "summary": "Lista as mensagens associadas a uma ajuda específica.",
+        "parameters": [
+          {
+            "name": "ajudaId",
+            "in": "path",
+            "description": "ID da ajuda.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mensagens encontradas.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MensagemResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MensagemResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MensagemResponseDTO"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Ajuda não encontrada."
+          }
+        }
+      }
+    },
+    "/api/Mensagem/{id}": {
+      "get": {
+        "tags": [
+          "Mensagem"
+        ],
+        "summary": "Retorna uma mensagem específica pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da mensagem.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mensagem encontrada.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensagemResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensagemResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MensagemResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Mensagem não encontrada."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Mensagem"
+        ],
+        "summary": "Atualiza uma mensagem existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da mensagem.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Novos dados da mensagem.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MensagemRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MensagemRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MensagemRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Mensagem atualizada."
+          },
+          "400": {
+            "description": "Dados inválidos."
+          },
+          "404": {
+            "description": "Mensagem não encontrada."
+          },
+          "500": {
+            "description": "Erro ao atualizar no banco."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Mensagem"
+        ],
+        "summary": "Exclui uma mensagem pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da mensagem.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Mensagem excluída com sucesso."
+          },
+          "404": {
+            "description": "Mensagem não encontrada."
+          },
+          "500": {
+            "description": "Erro ao excluir do banco."
+          }
+        }
+      }
+    },
+    "/api/TipoRecurso": {
+      "get": {
+        "tags": [
+          "TipoRecurso"
+        ],
+        "summary": "Lista todos os tipos de recurso cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Retorna todos os tipos de recurso.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoRecursoResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoRecursoResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoRecursoResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TipoRecurso"
+        ],
+        "summary": "Cadastra um novo tipo de recurso.",
+        "requestBody": {
+          "description": "Dados do tipo de recurso a ser criado.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoRecursoRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoRecursoRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoRecursoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoRecursoResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoRecursoResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoRecursoResponseDTO"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Tipo de recurso criado."
+          },
+          "500": {
+            "description": "Erro ao salvar no banco."
+          }
+        }
+      }
+    },
+    "/api/TipoRecurso/{id}": {
+      "get": {
+        "tags": [
+          "TipoRecurso"
+        ],
+        "summary": "Retorna um tipo de recurso pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do tipo de recurso.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tipo de recurso encontrado.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoRecursoResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoRecursoResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoRecursoResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tipo de recurso não encontrado."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TipoRecurso"
+        ],
+        "summary": "Atualiza um tipo de recurso existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do tipo de recurso a ser atualizado.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Novos dados do tipo de recurso.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoRecursoRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoRecursoRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoRecursoRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Atualização realizada com sucesso."
+          },
+          "404": {
+            "description": "Tipo de recurso não encontrado."
+          },
+          "500": {
+            "description": "Erro ao atualizar no banco."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TipoRecurso"
+        ],
+        "summary": "Remove um tipo de recurso pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do tipo de recurso a ser removido.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Tipo de recurso removido com sucesso."
+          },
+          "404": {
+            "description": "Tipo de recurso não encontrado."
+          },
+          "500": {
+            "description": "Erro ao remover no banco."
+          }
+        }
+      }
+    },
+    "/api/TipoUsuario": {
+      "get": {
+        "tags": [
+          "TipoUsuario"
+        ],
+        "summary": "Lista todos os tipos de usuário cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Retorna todos os tipos de usuário.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoUsuarioResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoUsuarioResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoUsuarioResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TipoUsuario"
+        ],
+        "summary": "Cadastra um novo tipo de usuário.",
+        "requestBody": {
+          "description": "Dados do tipo de usuário a ser criado.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoUsuarioRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoUsuarioRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoUsuarioRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsuarioResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsuarioResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsuarioResponseDTO"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Tipo de usuário criado."
+          },
+          "500": {
+            "description": "Erro ao salvar no banco."
+          }
+        }
+      }
+    },
+    "/api/TipoUsuario/{id}": {
+      "get": {
+        "tags": [
+          "TipoUsuario"
+        ],
+        "summary": "Retorna um tipo de usuário pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do tipo de usuário.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tipo de usuário encontrado.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsuarioResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsuarioResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoUsuarioResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tipo de usuário não encontrado."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TipoUsuario"
+        ],
+        "summary": "Atualiza um tipo de usuário existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do tipo de usuário a ser atualizado.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Novos dados do tipo de usuário.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoUsuarioRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoUsuarioRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoUsuarioRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Atualização realizada com sucesso."
+          },
+          "404": {
+            "description": "Tipo de usuário não encontrado."
+          },
+          "500": {
+            "description": "Erro ao atualizar no banco."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TipoUsuario"
+        ],
+        "summary": "Remove um tipo de usuário pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do tipo de usuário a ser removido.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Tipo de usuário removido com sucesso."
+          },
+          "404": {
+            "description": "Tipo de usuário não encontrado."
+          },
+          "500": {
+            "description": "Erro ao remover no banco."
+          }
+        }
+      }
+    },
+    "/api/TipoZona": {
+      "get": {
+        "tags": [
+          "TipoZona"
+        ],
+        "summary": "Lista todos os tipos de zona cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Retorna todos os tipos de zona.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoZonaResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoZonaResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoZonaResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TipoZona"
+        ],
+        "summary": "Cadastra um novo tipo de zona.",
+        "requestBody": {
+          "description": "Dados do tipo de zona a ser criado.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoZonaRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoZonaRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoZonaRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoZonaResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoZonaResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoZonaResponseDTO"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Tipo de zona criado com sucesso."
+          },
+          "500": {
+            "description": "Erro ao salvar no banco de dados."
+          }
+        }
+      }
+    },
+    "/api/TipoZona/{id}": {
+      "get": {
+        "tags": [
+          "TipoZona"
+        ],
+        "summary": "Retorna um tipo de zona pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do tipo de zona.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tipo de zona encontrado.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoZonaResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoZonaResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoZonaResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tipo de zona não encontrado."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TipoZona"
+        ],
+        "summary": "Atualiza um tipo de zona existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do tipo de zona a ser atualizado.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Novos dados do tipo de zona.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoZonaRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoZonaRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoZonaRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Atualização realizada com sucesso."
+          },
+          "404": {
+            "description": "Tipo de zona não encontrado."
+          },
+          "500": {
+            "description": "Erro ao atualizar no banco."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TipoZona"
+        ],
+        "summary": "Remove um tipo de zona pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do tipo de zona a ser removido.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Remoção realizada com sucesso."
+          },
+          "404": {
+            "description": "Tipo de zona não encontrado."
+          },
+          "500": {
+            "description": "Erro ao remover do banco."
+          }
+        }
+      }
+    },
+    "/api/Usuario": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Lista todos os usuários cadastrados.",
+        "responses": {
+          "200": {
+            "description": "Retorna a lista de usuários",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioResponseDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioResponseDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsuarioResponseDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Cria um novo usuário.",
+        "requestBody": {
+          "description": "Dados do novo usuário",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponseDTO"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação nos dados enviados",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuario/{id}": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Retorna um usuário pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do usuário",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Atualiza um usuário existente.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do usuário",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Novos dados",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRequestDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRequestDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioRequestDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Usuário atualizado com sucesso"
+          },
+          "404": {
+            "description": "Usuário ou Tipo de Usuário não encontrado",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Remove um usuário pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do usuário",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Usuário removido com sucesso"
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Usuario/email": {
+      "get": {
+        "tags": [
+          "Usuario"
+        ],
+        "summary": "Retorna um usuário pelo e-mail.",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "E-mail do usuário",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponseDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponseDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsuarioResponseDTO"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Usuário não encontrado",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AjudaRequestDTO": {
+        "type": "object",
+        "properties": {
+          "usuarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoRecursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AjudaResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usuarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoRecursoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeUsuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "recurso": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "dataPublicacao": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvaliacaoRequestDTO": {
+        "type": "object",
+        "properties": {
+          "ajudaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usuarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nota": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comentario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AvaliacaoResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ajudaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usuarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nota": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "comentario": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataAvaliacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "nomeUsuario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LocalizacaoRequestDTO": {
+        "type": "object",
+        "properties": {
+          "ajudaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "zonaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LocalizacaoResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ajudaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "zonaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "zona": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MensagemRequestDTO": {
+        "type": "object",
+        "properties": {
+          "ajudaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usuarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conteudo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MensagemResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ajudaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usuarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conteudo": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataEnvio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "nomeUsuario": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "TipoRecursoRequestDTO": {
+        "type": "object",
+        "properties": {
+          "recurso": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoRecursoResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "recurso": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoUsuarioRequestDTO": {
+        "type": "object",
+        "properties": {
+          "nomeTipo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoUsuarioResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeTipo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoZonaRequestDTO": {
+        "type": "object",
+        "properties": {
+          "zona": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoZonaResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "zona": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsuarioRequestDTO": {
+        "type": "object",
+        "properties": {
+          "tipoUsuarioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "senha": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsuarioResponseDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataCriacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "tipoUsuarioNome": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

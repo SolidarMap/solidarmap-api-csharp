@@ -1,0 +1,456 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SolidarMap</name>
+    </assembly>
+    <members>
+        <member name="T:SolidarMap.Controllers.AjudaController">
+            <summary>
+            Controlador responsável pelo gerenciamento de Ajudas.
+            </summary>
+        </member>
+        <member name="M:SolidarMap.Controllers.AjudaController.GetAjudas">
+            <summary>
+            Exibe todos as ajudas cadastradas.
+            </summary>
+            /// <response code="200">Retorna lista com objetos das ajudas encontradas.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AjudaController.GetAjuda(System.Int32)">
+            <summary>
+            Exibe o objeto da ajuda cadastrada no id informado.
+            </summary>
+            <param name="id">ID da ajuda a ser buscado.</param>
+            <returns>
+            Retorna <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/> (200) se o id da ajuda for encontrada,
+            ou <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundResult"/> (404) se a ajuda não for encontrada.
+            </returns>
+            <response code="200">Ajuda encontradA.</response>
+            <response code="404">Ajuda não encontrada no banco de dados.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AjudaController.GetAjudasPorUsuario(System.Int32)">
+            <summary>
+            Exibe uma lista de ajudas cadastradas no ID do usuário informado.
+            </summary>
+            <param name="usuarioId">ID do Usuário para buscar as ajudas.</param>
+            <returns>
+            Retorna <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/> (200) se for encontrado ajudas com ID do usuário,
+            ou <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundResult"/> (404) se não forem encontradas ajudas.
+            </returns>
+            <response code="200">Ajudas encontradas.</response>
+            <response code="404">Ajudas não encontradas no banco de dados.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AjudaController.PostAjuda(SolidarMap.DTO.AjudaRequestDTO)">
+            <summary>
+            Cadastra uma nova ajuda na base de dados.
+            </summary>
+            <param name="dto">Objeto com os dados da ajuda a ser cadastrada.</param>
+            <returns>
+            Retorna <c>201 Created</c> com os dados da ajuda criada, 
+            ou <c>400 BadRequest</c> se os dados forem inválidos.
+            </returns>
+            <response code="201">Ajuda inserida.</response>
+            <response code="400">Requisição inválida.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AjudaController.PutAjuda(System.Int32,SolidarMap.DTO.AjudaRequestDTO)">
+            <summary>
+            Atualiza os dados de uma ajuda existente no banco de dados.
+            </summary>
+            <param name="id">ID da ajuda a ser atualizada. Deve coincidir com o ID do objeto fornecido.</param>
+            <param name="dto">Objeto com os novos dados d.</param>
+            <returns>
+            Retorna <see cref="T:Microsoft.AspNetCore.Mvc.NoContentResult"/> (204) se a atualização for bem-sucedida,
+            <see cref="T:Microsoft.AspNetCore.Mvc.BadRequestResult"/> (400) se Usuário ou Tipo de Recurso forem inválidos,
+            ou <see cref="T:Microsoft.AspNetCore.Mvc.NotFoundResult"/> (404) se a ajuda não for encontrada.
+            </returns>
+            <response code="204">Atualização realizada com sucesso.</response>
+            <response code="400">Usuário ou Tipo de Recurso são inválidos.</response>
+            <response code="404">AJuda não encontrada no banco de dados.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AjudaController.DeleteAjuda(System.Int32)">
+            <summary>
+            Remove uma ajuda existente pelo seu id.
+            </summary>
+            <param name="id">ID da ajuda a ser removida.</param>
+            <returns>
+            Retorna <c>204 NoContent</c> se a exclusão for bem-sucedida, 
+            ou <c>404 NotFound</c> se a ajuda não for encontrada.
+            </returns>
+            <response code="204">Ajuda excluída.</response>
+            <response code="404">Ajuda não encontrado no banco de dados.</response>
+        </member>
+        <member name="T:SolidarMap.Controllers.AvaliacaoController">
+            <summary>
+            Controlador responsável pelo gerenciamento de avaliações.
+            </summary>
+        </member>
+        <member name="M:SolidarMap.Controllers.AvaliacaoController.GetAvaliacoes">
+            <summary>
+            Exibe todas as avaliações cadastradas.
+            </summary>
+            <response code="200">Retorna a lista de avaliações.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AvaliacaoController.GetAvaliacao(System.Int32)">
+            <summary>
+            Retorna uma avaliação específica pelo ID.
+            </summary>
+            <param name="id">ID da avaliação.</param>
+            <response code="200">Avaliação encontrada.</response>
+            <response code="404">Avaliação não encontrada.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AvaliacaoController.GetAvaliacoesPorAjuda(System.Int32)">
+            <summary>
+            Retorna todas as avaliações vinculadas a uma ajuda específica.
+            </summary>
+            <param name="ajudaId">ID da ajuda.</param>
+            <response code="200">Lista de avaliações encontrada.</response>
+            <response code="404">Ajuda não encontrada.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AvaliacaoController.PostAvaliacao(SolidarMap.DTO.AvaliacaoRequestDTO)">
+            <summary>
+            Cadastra uma nova avaliação.
+            </summary>
+            <param name="dto">Dados da avaliação.</param>
+            <response code="201">Avaliação criada.</response>
+            <response code="400">Dados inválidos.</response>
+            <response code="500">Erro ao salvar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AvaliacaoController.PutAvaliacao(System.Int32,SolidarMap.DTO.AvaliacaoRequestDTO)">
+            <summary>
+            Atualiza uma avaliação existente.
+            </summary>
+            <param name="id">ID da avaliação.</param>
+            <param name="dto">Novos dados.</param>
+            <response code="204">Atualização realizada com sucesso.</response>
+            <response code="400">Dados inválidos.</response>
+            <response code="404">Avaliação não encontrada.</response>
+            <response code="500">Erro ao atualizar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.AvaliacaoController.DeleteAvaliacao(System.Int32)">
+            <summary>
+            Remove uma avaliação pelo ID.
+            </summary>
+            <param name="id">ID da avaliação.</param>
+            <response code="204">Avaliação excluída com sucesso.</response>
+            <response code="404">Avaliação não encontrada.</response>
+            <response code="500">Erro ao remover do banco.</response>
+        </member>
+        <member name="T:SolidarMap.Controllers.LocalizacaoController">
+            <summary>
+            Controlador responsável pelo gerenciamento de localizações.
+            </summary>
+        </member>
+        <member name="M:SolidarMap.Controllers.LocalizacaoController.GetLocalizacoes">
+            <summary>
+            Lista todas as localizações cadastradas.
+            </summary>
+            <response code="200">Retorna todas as localizações.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.LocalizacaoController.GetLocalizacao(System.Int32)">
+            <summary>
+            Busca uma localização específica por ID.
+            </summary>
+            <param name="id">ID da localização.</param>
+            <response code="200">Localização encontrada.</response>
+            <response code="404">Localização não encontrada.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.LocalizacaoController.GetLocalizacaoPorAjuda(System.Int32)">
+            <summary>
+            Busca uma localização associada a uma ajuda.
+            </summary>
+            <param name="ajudaId">ID da ajuda.</param>
+            <response code="200">Localização encontrada.</response>
+            <response code="404">Localização não encontrada.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.LocalizacaoController.PostLocalizacao(SolidarMap.DTO.LocalizacaoRequestDTO)">
+            <summary>
+            Cadastra uma nova localização.
+            </summary>
+            <param name="dto">Dados da localização.</param>
+            <response code="201">Localização criada.</response>
+            <response code="400">Dados inválidos (ajuda ou zona inexistente).</response>
+            <response code="500">Erro interno ao salvar no banco de dados.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.LocalizacaoController.PutLocalizacao(System.Int32,SolidarMap.DTO.LocalizacaoRequestDTO)">
+            <summary>
+            Atualiza os dados de uma localização existente.
+            </summary>
+            <param name="id">ID da localização.</param>
+            <param name="dto">Novos dados da localização.</param>
+            <response code="204">Atualização bem-sucedida.</response>
+            <response code="400">Dados inválidos.</response>
+            <response code="404">Localização não encontrada.</response>
+            <response code="500">Erro ao atualizar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.LocalizacaoController.DeleteLocalizacao(System.Int32)">
+            <summary>
+            Remove uma localização pelo ID.
+            </summary>
+            <param name="id">ID da localização.</param>
+            <response code="204">Localização excluída com sucesso.</response>
+            <response code="404">Localização não encontrada.</response>
+            <response code="500">Erro ao remover do banco.</response>
+        </member>
+        <member name="T:SolidarMap.Controllers.MensagemController">
+            <summary>
+            Controlador responsável pelo gerenciamento de mensagens.
+            </summary>
+        </member>
+        <member name="M:SolidarMap.Controllers.MensagemController.GetMensagens">
+            <summary>
+            Lista todas as mensagens cadastradas.
+            </summary>
+            <response code="200">Retorna todas as mensagens.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.MensagemController.GetMensagensPorAjuda(System.Int32)">
+            <summary>
+            Lista as mensagens associadas a uma ajuda específica.
+            </summary>
+            <param name="ajudaId">ID da ajuda.</param>
+            <response code="200">Mensagens encontradas.</response>
+            <response code="404">Ajuda não encontrada.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.MensagemController.GetMensagem(System.Int32)">
+            <summary>
+            Retorna uma mensagem específica pelo ID.
+            </summary>
+            <param name="id">ID da mensagem.</param>
+            <response code="200">Mensagem encontrada.</response>
+            <response code="404">Mensagem não encontrada.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.MensagemController.PostMensagem(SolidarMap.DTO.MensagemRequestDTO)">
+            <summary>
+            Cadastra uma nova mensagem.
+            </summary>
+            <param name="dto">Dados da mensagem.</param>
+            <response code="201">Mensagem criada.</response>
+            <response code="400">Dados inválidos.</response>
+            <response code="500">Erro ao salvar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.MensagemController.PutMensagem(System.Int32,SolidarMap.DTO.MensagemRequestDTO)">
+            <summary>
+            Atualiza uma mensagem existente.
+            </summary>
+            <param name="id">ID da mensagem.</param>
+            <param name="dto">Novos dados da mensagem.</param>
+            <response code="204">Mensagem atualizada.</response>
+            <response code="400">Dados inválidos.</response>
+            <response code="404">Mensagem não encontrada.</response>
+            <response code="500">Erro ao atualizar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.MensagemController.DeleteMensagem(System.Int32)">
+            <summary>
+            Exclui uma mensagem pelo ID.
+            </summary>
+            <param name="id">ID da mensagem.</param>
+            <response code="204">Mensagem excluída com sucesso.</response>
+            <response code="404">Mensagem não encontrada.</response>
+            <response code="500">Erro ao excluir do banco.</response>
+        </member>
+        <member name="T:SolidarMap.Controllers.TipoRecursoController">
+            <summary>
+            Controlador responsável por gerenciar os tipos de recurso.
+            </summary>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoRecursoController.GetTipos">
+            <summary>
+            Lista todos os tipos de recurso cadastrados.
+            </summary>
+            <response code="200">Retorna todos os tipos de recurso.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoRecursoController.GetTipo(System.Int32)">
+            <summary>
+            Retorna um tipo de recurso pelo ID.
+            </summary>
+            <param name="id">ID do tipo de recurso.</param>
+            <response code="200">Tipo de recurso encontrado.</response>
+            <response code="404">Tipo de recurso não encontrado.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoRecursoController.PostTipo(SolidarMap.DTO.TipoRecursoRequestDTO)">
+            <summary>
+            Cadastra um novo tipo de recurso.
+            </summary>
+            <param name="dto">Dados do tipo de recurso a ser criado.</param>
+            <response code="201">Tipo de recurso criado.</response>
+            <response code="500">Erro ao salvar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoRecursoController.PutTipo(System.Int32,SolidarMap.DTO.TipoRecursoRequestDTO)">
+            <summary>
+            Atualiza um tipo de recurso existente.
+            </summary>
+            <param name="id">ID do tipo de recurso a ser atualizado.</param>
+            <param name="dto">Novos dados do tipo de recurso.</param>
+            <response code="204">Atualização realizada com sucesso.</response>
+            <response code="404">Tipo de recurso não encontrado.</response>
+            <response code="500">Erro ao atualizar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoRecursoController.DeleteTipo(System.Int32)">
+            <summary>
+            Remove um tipo de recurso pelo ID.
+            </summary>
+            <param name="id">ID do tipo de recurso a ser removido.</param>
+            <response code="204">Tipo de recurso removido com sucesso.</response>
+            <response code="404">Tipo de recurso não encontrado.</response>
+            <response code="500">Erro ao remover no banco.</response>
+        </member>
+        <member name="T:SolidarMap.Controllers.TipoUsuarioController">
+            <summary>
+            Controlador responsável por gerenciar os tipos de usuário.
+            </summary>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoUsuarioController.GetTipos">
+            <summary>
+            Lista todos os tipos de usuário cadastrados.
+            </summary>
+            <response code="200">Retorna todos os tipos de usuário.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoUsuarioController.GetTipo(System.Int32)">
+            <summary>
+            Retorna um tipo de usuário pelo ID.
+            </summary>
+            <param name="id">ID do tipo de usuário.</param>
+            <response code="200">Tipo de usuário encontrado.</response>
+            <response code="404">Tipo de usuário não encontrado.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoUsuarioController.PostTipo(SolidarMap.DTO.TipoUsuarioRequestDTO)">
+            <summary>
+            Cadastra um novo tipo de usuário.
+            </summary>
+            <param name="dto">Dados do tipo de usuário a ser criado.</param>
+            <response code="201">Tipo de usuário criado.</response>
+            <response code="500">Erro ao salvar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoUsuarioController.PutTipo(System.Int32,SolidarMap.DTO.TipoUsuarioRequestDTO)">
+            <summary>
+            Atualiza um tipo de usuário existente.
+            </summary>
+            <param name="id">ID do tipo de usuário a ser atualizado.</param>
+            <param name="dto">Novos dados do tipo de usuário.</param>
+            <response code="204">Atualização realizada com sucesso.</response>
+            <response code="404">Tipo de usuário não encontrado.</response>
+            <response code="500">Erro ao atualizar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoUsuarioController.DeleteTipo(System.Int32)">
+            <summary>
+            Remove um tipo de usuário pelo ID.
+            </summary>
+            <param name="id">ID do tipo de usuário a ser removido.</param>
+            <response code="204">Tipo de usuário removido com sucesso.</response>
+            <response code="404">Tipo de usuário não encontrado.</response>
+            <response code="500">Erro ao remover no banco.</response>
+        </member>
+        <member name="T:SolidarMap.Controllers.TipoZonaController">
+            <summary>
+            Controlador responsável por gerenciar os tipos de zona.
+            </summary>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoZonaController.GetTiposZona">
+            <summary>
+            Lista todos os tipos de zona cadastrados.
+            </summary>
+            <response code="200">Retorna todos os tipos de zona.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoZonaController.GetTipoZona(System.Int32)">
+            <summary>
+            Retorna um tipo de zona pelo ID.
+            </summary>
+            <param name="id">ID do tipo de zona.</param>
+            <response code="200">Tipo de zona encontrado.</response>
+            <response code="404">Tipo de zona não encontrado.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoZonaController.PostTipoZona(SolidarMap.DTO.TipoZonaRequestDTO)">
+            <summary>
+            Cadastra um novo tipo de zona.
+            </summary>
+            <param name="dto">Dados do tipo de zona a ser criado.</param>
+            <response code="201">Tipo de zona criado com sucesso.</response>
+            <response code="500">Erro ao salvar no banco de dados.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoZonaController.PutTipoZona(System.Int32,SolidarMap.DTO.TipoZonaRequestDTO)">
+            <summary>
+            Atualiza um tipo de zona existente.
+            </summary>
+            <param name="id">ID do tipo de zona a ser atualizado.</param>
+            <param name="dto">Novos dados do tipo de zona.</param>
+            <response code="204">Atualização realizada com sucesso.</response>
+            <response code="404">Tipo de zona não encontrado.</response>
+            <response code="500">Erro ao atualizar no banco.</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.TipoZonaController.DeleteTipoZona(System.Int32)">
+            <summary>
+            Remove um tipo de zona pelo ID.
+            </summary>
+            <param name="id">ID do tipo de zona a ser removido.</param>
+            <response code="204">Remoção realizada com sucesso.</response>
+            <response code="404">Tipo de zona não encontrado.</response>
+            <response code="500">Erro ao remover do banco.</response>
+        </member>
+        <member name="T:SolidarMap.Controllers.UsuarioController">
+            <summary>
+            Controlador responsável por gerenciar os usuários do sistema.
+            </summary>
+        </member>
+        <member name="M:SolidarMap.Controllers.UsuarioController.GetUsuarios">
+            <summary>
+            Lista todos os usuários cadastrados.
+            </summary>
+            <returns>Lista de usuários</returns>
+            <response code="200">Retorna a lista de usuários</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.UsuarioController.GetUsuario(System.Int32)">
+            <summary>
+            Retorna um usuário pelo ID.
+            </summary>
+            <param name="id">ID do usuário</param>
+            <returns>Usuário correspondente</returns>
+            <response code="200">Usuário encontrado</response>
+            <response code="404">Usuário não encontrado</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.UsuarioController.GetUsuarioPorEmail(System.String)">
+            <summary>
+            Retorna um usuário pelo e-mail.
+            </summary>
+            <param name="email">E-mail do usuário</param>
+            <returns>Usuário correspondente</returns>
+            <response code="200">Usuário encontrado</response>
+            <response code="404">Usuário não encontrado</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.UsuarioController.PostUsuario(SolidarMap.DTO.UsuarioRequestDTO)">
+            <summary>
+            Cria um novo usuário.
+            </summary>
+            <param name="dto">Dados do novo usuário</param>
+            <returns>Usuário criado</returns>
+            <response code="201">Usuário criado com sucesso</response>
+            <response code="400">Erro de validação nos dados enviados</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.UsuarioController.PutUsuario(System.Int32,SolidarMap.DTO.UsuarioRequestDTO)">
+            <summary>
+            Atualiza um usuário existente.
+            </summary>
+            <param name="id">ID do usuário</param>
+            <param name="dto">Novos dados</param>
+            <response code="204">Usuário atualizado com sucesso</response>
+            <response code="404">Usuário ou Tipo de Usuário não encontrado</response>
+        </member>
+        <member name="M:SolidarMap.Controllers.UsuarioController.DeleteUsuario(System.Int32)">
+            <summary>
+            Remove um usuário pelo ID.
+            </summary>
+            <param name="id">ID do usuário</param>
+            <response code="204">Usuário removido com sucesso</response>
+            <response code="404">Usuário não encontrado</response>
+        </member>
+        <member name="T:SolidarMap.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:SolidarMap.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SolidarMap.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SolidarMap.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
