@@ -13,7 +13,5 @@ namespace SolidarMap.Models
         [Required, MaxLength(30)]
         [Column("ZONA")]
         public string Zona { get; set; }
-
-        public ICollection<Localizacao> Localizacoes { get; set; }
     }
 }

@@ -35,8 +35,5 @@ namespace SolidarMap.Models
         [ForeignKey("RecursoId")]
         public TipoRecurso TipoRecurso { get; set; }
 
-        public ICollection<Localizacao> Localizacoes { get; set; }
-        public ICollection<Avaliacao> Avaliacoes { get; set; }
-        public ICollection<Mensagem> Mensagens { get; set; }
     }
 }

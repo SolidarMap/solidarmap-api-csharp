@@ -14,6 +14,5 @@ namespace SolidarMap.Models
         [Column("NOME_TIPO")]
         public string NomeTipo { get; set; }
 
-        public ICollection<Usuario> Usuarios { get; set; }
     }
 }

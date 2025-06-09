@@ -31,9 +31,5 @@ namespace SolidarMap.Models
 
         [ForeignKey("TipoUsuarioId")]
         public TipoUsuario TipoUsuario { get; set; }
-
-        public ICollection<Ajuda> Ajudas { get; set; }
-        public ICollection<Avaliacao> Avaliacoes { get; set; }
-        public ICollection<Mensagem> Mensagens { get; set; }
     }
 }

@@ -13,7 +13,5 @@ namespace SolidarMap.Models
         [Required, MaxLength(50)]
         [Column("RECURSO")]
         public string Recurso { get; set; }
-
-        public ICollection<Ajuda> Ajudas { get; set; }
     }
 }
