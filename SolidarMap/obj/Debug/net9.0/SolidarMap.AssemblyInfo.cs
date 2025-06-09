@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SolidarMap")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6cceb0897d557cd4c0802e797cd070bc1f56674f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SolidarMap")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SolidarMap")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
