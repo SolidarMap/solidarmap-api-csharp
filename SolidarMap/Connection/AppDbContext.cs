@@ -13,9 +13,9 @@ namespace SolidarMap.Connection
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Ajuda> Ajudas { get; set; }
-        public DbSet<TipoUsuario> TiposUsuarios { get; set; }
-        public DbSet<TipoRecurso> TiposRecursos { get; set; }
-        public DbSet<TipoZona> tipoZonas { get; set; }
+        public DbSet<TipoUsuario> TiposUsuario { get; set; }
+        public DbSet<TipoRecurso> TiposRecurso { get; set; }
+        public DbSet<TipoZona> TiposZona { get; set; }
         public DbSet<Localizacao> Localizacoes { get; set; }
         public DbSet<Avaliacao> Avaliacoes { get; set; }
         public DbSet<Mensagem> Mensagens { get; set; }
